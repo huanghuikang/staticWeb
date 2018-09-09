@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Javascript</title>
+<script>
+	alert("这是警告框");
+	alert("hello jvacript.");
+	confirm("这是确定框");
+	document.write("HELLO &nbsp; JAVACRIPT<br/>");
+	
+   function promptDemo(){
+	   document.write("这是输入框<br/>");
+       var score=prompt("请输入分数");
+       if(score>90){
+           document.write("我真是学霸");
+       }
+       else if(80<score){
+           document.write("80--90");
+       }
+       else if(score<80){
+           document.write("需要好好学习，你一定行！");
+       }
+
+	   }
+</script>
+</head>
+<body>
+	<input type="button" value="来点我" onclick="promptDemo()"/>
+</body>
+</html>
