@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-/* 	实现二级联动
+	/* 实现二级联动
 	监听city的改变事件 */
 	function changeDistrict(){
 	//获取区域标签
@@ -27,7 +27,14 @@
 		break;
 	}
 }
-
+	//onfoucus:获得焦点的事件
+	//onblur:失去焦点的事件
+	function begin() {
+		document.getElementById('tip').innerHTML = '输入中。。。';
+	}
+	function end() {
+		document.getElementById('tip').innerHTML = '输入结束';
+	}
 </script>
 </head>
 <body>
@@ -40,7 +47,9 @@
 		<option>天河区</option>
 		<option>白云区</option>
 		<option>越秀区</option>
-
 	</select>
+	<br>
+	请输入用户名<input type="text" name = "username" onfocus = "begin()" onblur = "end()"/>
+	<span id = "tip" style = "color:red"></span>
 </body>
 </html>
