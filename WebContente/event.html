@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+/* 	实现二级联动
+	监听city的改变事件 */
+	function changeDistrict(){
+	//获取区域标签
+	var districtTag = document.getElementById('district');
+	//获取 城市标签
+	var cityTag = document.getElementById('city');
+	//获取选择的城市值
+	var cityCode = cityTag.value;
+	//判断所选城区
+	switch(cityCode){
+	case 'gz':
+		//更改子标签内容
+		districtTag.innerHTML = '<option>天河区</option><option>白云区</option><option>越秀区</option>'
+		break;
+	case 'sz':
+		districtTag.innerHTML = '<option>南山区</option><option>福田区</option><option>罗湖区</option>'
+		break;
+	case 'hz':
+		districtTag.innerHTML = '<option>惠城区</option><option>惠阳区</option>'
+		break;
+	}
+}
+
+</script>
+</head>
+<body>
+	<select name = "cisty" id = "city" onchange="changeDistrict()">
+		<option value = "gz"> 广州</option>
+		<option value="sz">深圳</option>
+		<option value="hz">惠州</option>
+	</select>
+	<select name = "district" id = "district">
+		<option>天河区</option>
+		<option>白云区</option>
+		<option>越秀区</option>
+
+	</select>
+</body>
+</html>
