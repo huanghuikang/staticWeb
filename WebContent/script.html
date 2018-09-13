@@ -84,6 +84,82 @@
 	}
 	   document.getElementById("demo").innerHTML = w;
    }
+//函数
+      function uObj() {
+/* 	   Boolean 对象是一个将布尔值打包的布尔对象。
+	   Boolean 对象主要用于提供将布尔值转换成字符串的 toString() 方法。
+	   new Boolean(value);	//构造函数
+	   Boolean(value);		//转换函数
+	   当作为一个构造函数（带有运算符 new）调用时，Boolean() 将把它的参数转换成一个布尔值，并且返回一个包含该值的 Boolean 对象。
+	   如果作为一个函数（不带有运算符 new）调用时，Boolean() 只将把它的参数转换成一个原始的布尔值，并且返回这个值。 */
+	   //把字符串转成对象
+	   var b1 = new Boolean('true');
+	   alert(typeof(b1));
+	   //对象转成原始boolean类型
+	   //相当于包装类转基本数据类型Boolean
+	   var b2 = Boolean(b1);
+	   alter(typeof(b2));
+   }
+   function numT(){
+	   var n1 = 16;
+		alter(typeof(n1));//number基本数据类型
+		//string转Number包装类对象
+		var n2 = new Number('3');
+		alter(typeof(n2));
+   }
+   function arrayT(){
+	   //Array 对象用于在单个的变量中存储多个值。
+	   //创建数组
+	   var arr1 = new Array();
+	   arr1.push('dady');
+	   alert(arr1.length);
+	   //创建数组
+	   var arr2 = new Array(2);
+	   arr2.push('brother');//放在第三的位置
+	   alert(arr2[2]);
+	   //创建数组
+	   var arr3 = new Array('tony','jery','kity');
+	   arr3.push('nana');
+	   arert(arr3.length);
+	   alert(arr3.toString());//转成字符串
+	   //控制台输出（必须掌握）
+	   console.log(arr3.toString());
+	   
+   }
+   function strT(){
+	   var s1 = '你好，做我用友好吗';
+	   console.log(typeof(s1));
+	   //基本数据类型转对象
+	   var s2 = new String(s1);
+	   console.log(typeof(s2));
+	   //对象类型转string基本数据类型
+	   var s3 = String(s2);
+	   console.log(typeof(s3));
+	   /* 不管是基本数据类型不是对象欧辰噶，都三中心调用字符串的方法，因为js是四不像 */
+	   //我的位置
+	   var index = s2.indesOf('我');
+	   console.log(index);
+   }
+   function dateT() {
+	   //Date对象用于处理日期和时间。
+	   //创建一个日期对象
+	   var dt = new Date();
+	   console.log('年:' + dt.getYear());
+	   console.log('月:' + dt.getMonth());
+	   console.log('日:' + dt.getData());
+	   console.log('时：' + dt.getHours());
+	   console.log('分：' + dt.getMinutes());
+	   console.log('秒：' + dt.getSeconds());
+	   console.log('毫秒：' + dt.getMilliseconds());
+   }
+   function mathT(){
+	   //Math对象用于执行数学任务。
+	   var pi = Math.PI;
+	   console.log('PI:' + pi);
+	   console.log('4的平方：' + Math.pow(4,2));
+	   console.log('4的3次方：' + Math.pow(4,3));
+	   console.log('随机数：' + Math.random());
+   }
 </script>
 </head>
 <body>
