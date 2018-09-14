@@ -35,6 +35,21 @@
 	function end() {
 		document.getElementById('tip').innerHTML = '输入结束';
 	}
+	//onmouseover:鼠标悬浮的事件
+	//onmouseout:鼠标离开的事件
+	function over(){
+		document.getElementById('d1').style.backgroundColor = 'green';
+	}
+	function out(){
+		document.getElementById('d1').style.backgroundColor = 'yellow';
+	}
+	//onload:加载完毕的事件
+	//等到页面加载完毕在再执行onloadj事件所指向的函数
+	//所有标签加载显示完成后才调用
+	window.onload = function(){
+		//设置div内容，如果代码放在外面，不会显示内容，因力HTML没载完成，找不到id的标签
+		document.getElementById('d2').innerHTML = "春夏秋冬";
+	}
 </script>
 </head>
 <body>
@@ -51,5 +66,8 @@
 	<br>
 	请输入用户名<input type="text" name = "username" onfocus = "begin()" onblur = "end()"/>
 	<span id = "tip" style = "color:red"></span>
+		<br>
+	<div id = "d1" style = "width: 100px;heignt:100pz;background-color:red" onmouseover="over()" onmouseout="out()">ABCDEFGHIJ</div>
+	<div id = "d2" style = "width:100px;height:100px;background-color: orange"></div>
 </body>
 </html>
