@@ -50,6 +50,14 @@
 		//设置div内容，如果代码放在外面，不会显示内容，因力HTML没载完成，找不到id的标签
 		document.getElementById('d2').innerHTML = "春夏秋冬";
 	}
+	window.onload = function() {
+	//事件的另一种监听【控件。事件】,这种必须写在onload中，还有一种方法，把代码写在标签后面
+	document.getElementById('d3').onclick = function(){
+		document.write("good");
+		//仅记：this指的是当前标签
+		this.innerHTML = "JAVA";
+	}
+}
 </script>
 </head>
 <body>
@@ -69,5 +77,6 @@
 		<br>
 	<div id = "d1" style = "width: 100px;heignt:100pz;background-color:red" onmouseover="over()" onmouseout="out()">ABCDEFGHIJ</div>
 	<div id = "d2" style = "width:100px;height:100px;background-color: orange"></div>
+	<div id="d3" style = "width: 100px;height: 100px; background-color: red"></div>
 </body>
 </html>
