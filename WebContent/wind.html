@@ -1,1 +1,29 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>windows对象</title>
+<script type="text/javascript">
+	function win1() {
+		//alter是window对象的方法，平时编写可以省略window
+		window.alert("2018年即将过去，欢迎2019年到来");
+	}
+	function win2() {
+		//显示带有一段消息以及确认按钮和取消按钮的对话框。
+		//用户选择后，会返回true或者false
+		var rs1 = window.confirm("你确定要分手吗？");
+		alter("rs1");
+	}
+	function win3() {
+		//显示可提示用户输入的对话框,点确定后，返回用户输入的密码，点取消，返回null
+		var rs1 = prompt("请您输入您的密码");
+		alter("你输入的密码是：" + rs1);
+	}
+</script>
+</head>
+<body>
+	<button id = "win1" onclick="win1()">点击1</button>
+	<button id = "win2" onclick="win2()">点击2</button>
+	<button id = "win3" onclick="win3()">点击3</button>
+</body>
+</html>
