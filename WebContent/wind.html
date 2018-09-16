@@ -19,11 +19,48 @@
 		var rs1 = prompt("请您输入您的密码");
 		alert("你输入的密码是：" + rs1);
 	}
+	function openT() {
+		//打开另一个连接
+		window.open("http://www.baidu.com");
+	}
+	//定时器，指定时间执行任务
+	//定义全局变量
+	var timer;
+	function orderTime() {
+		timer = setTimeout(function() {
+			console.log("全军出击。。。")
+		}, 5000);
+	}
+	function clearTime() {
+		//clearTimeout(定时器名称)     清除定时器
+		clearTimeout(timer);
+		alert("执行成功");
+	}
+	function timeStart() {
+		timer = setInterval(function() {
+			console.log("1秒执行100w");
+		}, 1000);
+	}
+	function timeClear() {
+		clearInterval(timer);
+	}
 </script>
 </head>
 <body>
-	<button id = "win1" onclick="win1()">点击1</button>
-	<button id = "win2" onclick="win2()">点击2</button>
-	<button id = "win3" onclick="win3()">点击3</button>
+	<button id = "click1" onclick="win1()" style="background-color: red;">点击1</button><br>
+	<hr/>
+	<button id = "click2" onclick="win2()" style="background-color: yellow;">点击2</button><br>
+	<hr/>
+	<button id = "click3" onclick="win3()" style="background-color: blue;">点击3</button><br>
+	<hr/>
+	<button id = "click4" onclick="openT()" style="background-color: orange;">打开其他连接</button><br>
+	<hr/>
+	<button id = "oder_time" onclick="orderTime()" style="background-color: green;">开启定时器，五秒后执行</button>
+	<br>
+	<button id = "clear_time" onclick="clearTime()" style="background-color: green;">清除定时器</button>
+	<br>
+	<hr/>
+	<button id = "timeStart" onclick="timeStart()" style="background-color: purple;">开启定时器</button><br>
+	<button id = "timeClear" onclick="timeClear()" style="background-color: purple;">清除定时器</button><br>
 </body>
 </html>
