@@ -1,0 +1,37 @@
+<div class="header">
+  <div class="header_inner1">
+    <ul class="nav">
+      <li><a href="<%linkurl("index")%>">首页</a></li>
+<img src="<%templateskin%>/images/bar1.png" width="2" height="36" alt="喷码机">
+      <li><a href="<%linkurl("goods_list",42)%>">喷码机</a></li>
+<img src="<%templateskin%>/images/bar1.png" width="2" height="36" alt="激光机">
+      <li><a href="<%linkurl("goods_list",17)%>">激光机</a></li>
+<img src="<%templateskin%>/images/bar1.png" width="2" height="36" alt="配件耗材">
+      <li><a href="<%linkurl("goods_list",19)%>">配件耗材</a></li>
+<img src="<%templateskin%>/images/bar1.png" width="2" height="36" alt="案例中心">
+      <li><a href="<%linkurl("news_list",56)%>">案例中心</a></li>
+<img src="<%templateskin%>/images/bar1.png" width="2" height="36" alt="样品展示">
+      <li><a href="<%linkurl("news_list",45)%>">样品展示</a></li>
+<img src="<%templateskin%>/images/bar1.png" width="2" height="36" alt="技术支持">
+      <li><a href="<%linkurl("news_list",63)%>">技术支持</a></li>
+<img src="<%templateskin%>/images/bar1.png" width="2" height="36" alt="关于联创">
+      <li><a href="<%linkurl("content","about")%>">关于联创</a></li>
+    </ul>
+</div>
+<dl class="header_inner2">
+<dd class="left"></dd>    
+<dd><span>热销产品：</span>
+<ul class="menu">
+              <%set DataTable redGoods11=get_article_list("goods", 0, 6, "status=0 and is_red=1")%>
+          <%foreach(DataRow dr in redGoods11.Rows)%>
+          <li><a href="<%linkurl("goods_show",{dr[id]})%>">{dr[sub_title]}</a></li>
+          <%/foreach%>
+    </ul>
+<div class="search">
+      <div class="submit" onclick="SiteSearch('<%linkurl("search")%>', '#keywords','goods');"></div>
+      <input id="keywords" name="keywords" class="input" type="text" x-webkit-speech="" autofocus="" placeholder="请输入关键字" onkeydown="if(event.keyCode==13){SiteSearch('<%linkurl("search")%>', '#keywords','goods');return false};" />
+    </div>
+</dd>
+<dd class="right"></dd>    
+  </dl>
+</div>
