@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<%set RSTcms.Model.article_category cmodel=get_category_model(model.category_id)%>
+<title>{model.title} - {config.webname}</title>
+<meta content="{model.seo_keywords}" name="keywords" />
+<meta content="{model.seo_description}" name="description" />
+<link rel="stylesheet" href="<%templateskin%>/css/style.css" />
+<script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/base.js"></script>
+{config.webcountcode}
+</head>
+
+<body>
+<!--Header-->
+<%template src="_header.html"%>
+<!--/Header-->
+
+<div class="wrap">
+<%if({cmodel.temp_id}==1)%>
+  <div class="right766">
+   <!--Content-->
+<div class="main_box">
+<dl class="hdr">
+<dd class="left"></dd>      
+<dd class="w766"><h1>{model.title}</h1></dd>      
+<dd class="right"></dd>      
+</dl>
+<div class="lst766 p20">
+    <div class="content">
+      <div class="entry">
+        {model.content}
+      </div>
+    </div>
+</div>
+<dl class="ftr">
+<dd class="left"></dd>      
+<dd class="w766"></dd>      
+<dd class="right"></dd>      
+</dl>
+    </div>
+    <!--/Content-->
+  </div>
+  <div class="left202">
+    <!--Sidebar-->
+    <!--产品分类-->
+    <div class="frame2">
+      <div class="hdr"><h3 class="gylc"></h3></div>
+     <div  class="lst1"><ul>
+        <%set DataTable contentlist=get_article_list("content", 32, 0, "status=0")%>
+        <%loop cdr3 contentlist%>
+        <li>
+          <a class="font18" href="<%linkurl("content",{cdr3[call_index]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{cdr3[title]}</a>
+        </li>
+        <%/loop%>
+      </ul></div>
+      <div class="ftr"></div>
+</div>
+<!--/产品分类-->
+<div class="line20"></div>
+<div class="frame3"><div class="cont1"><%=get_article_content("frame3cont1")%></div><div class="cont2"><%=get_article_content("frame3cont2")%></div></div>
+    <!--/Sidebar-->
+  </div>
+<%else%>
+<div class="breadcrumb">
+<%set string category_nav=get_category_menu("goods_list", model.category_id)%>
+<span><a href="<%linkurl("index")%>">首页</a>{category_nav}</span>
+</div>
+<div class="line15"></div>
+      <div class="entry">
+        {model.content}
+      </div>
+<%/if%>
+</div>
+<div class="clear"></div>
+<!--Footer-->
+<%template src="_footer.html"%>
+<!--/Footer-->
+</body>
+</html>
