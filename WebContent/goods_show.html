@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<%set RSTcms.Model.article_category cmodel=get_category_model(model.category_id)%>
+<%set string category_title=cmodel.title%>
+<title>{model.title} - {category_title} - {config.webname}</title>
+<meta content="{model.seo_keywords}" name="keywords" />
+<meta content="{model.seo_description}" name="description" />
+<link media="screen" type="text/css" href="<%templateskin%>/css/style.css" rel="stylesheet">
+<script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{config.webpath}scripts/jquery/jquery.jqzoom.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/base.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/picture.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/cart.js"></script>
+<script type="text/javascript">
+	$(function(){
+		tabs('#goodsTabs','click');
+		//智能浮动层
+		//$("#tab_head").smartFloat();
+	});
+</script>
+{config.webcountcode}
+</head>
+
+<body>
+<!--Header-->
+<%template src="_header.html"%>
+<!--/Header-->
+
+<div class="wrap">
+<div class="breadcrumb">
+<%set string category_nav=get_category_menu("goods_list", model.category_id)%>
+<span><a href="<%linkurl("index")%>">首页</a>{category_nav} &gt;&gt; {model.title}</span>
+</div>
+<div class="line15"></div>
+    <div class="main_box">
+      <!--产品介绍-->
+      <div id="goodsTabs">
+<dl class="hdr47">
+<dd class="left"></dd>
+<dd class="w980">
+        <div id="tab_head" class="pro-tabs">
+          <ul>
+            <li><a class="current" href="javascript:;">产品介绍</a></li>
+<%if({cmodel.temp_id}==1)%>
+            <li><a href="javascript:;">机器图片展示</a></li>
+            <li><a href="javascript:;">产品参数</a></li>
+<%/if%>
+          </ul>
+        </div>
+</dd>
+<dd class="right"></dd>
+</dl>
+        <div class="tab_inner entry" style="display:block;">
+          {model.content}
+          <div class="line10"></div>
+        </div>
+        
+        <div class="tab_inner">
+      <!--产品图片-->
+{model.fields[pro_img]}
+       <!--/产品图片-->
+        </div>
+        <div class="tab_inner">
+      <!--产品参数-->
+{model.fields[pro_feat]}
+      <!--/产品参数-->
+</div>
+<div class="lst980">
+<div class="pagingnav">
+<p>上一个：<%=get_prevandnext_article("goods_show", -1, "没有资料！", 0)%></p>
+<p>下一个：<%=get_prevandnext_article("goods_show", 1, "没有资料！", 0)%></p>
+</div>
+</div>
+      <dl class="ftr">
+        <dd class="left"></dd>
+        <dd class="w980"></dd>
+        <dd class="right"></dd>
+      </dl>
+      </div>
+      <!--/产品介绍-->
+<div class="line20"></div>
+      <!--使用客户-->
+{model.fields[pro_cust]}
+      <!--/使用客户-->
+<div class="line20"></div>
+      <!--配套提供-->
+{model.fields[pro_other]}
+      <!--/配套提供-->
+  </div>
+</div>
+<div class="clear"></div>
+<!--Footer-->
+<%template src="_footer.html"%>
+<!--/Footer-->
+</body>
+</html>
