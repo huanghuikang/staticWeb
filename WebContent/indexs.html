@@ -1,0 +1,257 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{config.webtitle}</title>
+<meta content="{config.webkeyword}" name="keywords" />
+<meta content="{config.webdescription}" name="description" />
+<link media="screen" type="text/css" href="<%templateskin%>/css/style.css" rel="stylesheet">
+<script type="text/javascript" src="{config.webpath}tools/browser_redirect.ashx"></script>
+<script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{config.webpath}scripts/jquery/jquery.KinSlideshow-1.2.1.min.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/base.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/winframe.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#homeAd").KinSlideshow({ isHasTitleBar: false, isHasTitleFont: false, isHasBtn: true, intervalTime: 15 });
+    })
+</script>
+{config.webcountcode}
+</head>
+
+<body>
+<!--Header-->
+<%template src="_header.html"%>
+<!--/Header-->
+
+<div class="wrap">  
+<!--首页AD-->
+<div id="homeAd" class="ihomead">
+    <%set DataTable dt1=get_article_list("content", 33, 4, "status=0")%>
+    <%foreach(DataRow dr in dt1.Rows)%>
+      <a title="{dr[title]}" target="_blank" href="<%linkurl("content",{dr[call_index]})%>"><img src="{dr[img_url]}" alt="{dr[title]}"/></a>
+    <%/foreach%>
+</div>
+<!--/首页AD-->
+<div class="line20"></div>
+<!--产品分类、热销产品、免费喷印样品、服务流程-->
+<div class="left202">
+<!--产品分类-->
+    <div class="frame2">
+      <div class="hdr"><h3></h3></div>
+     <div  class="lst1"><ul>
+        <%set DataTable dt3=get_category_list("goods", 0,6,"call_index like 'home_%'")%>
+        <%loop cdr3 dt3%>
+        <li>
+          <a class="font18" href="<%linkurl("goods_list",{cdr3[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{cdr3[title]}</a>
+        </li>
+        <%/loop%>
+      </ul></div>
+      <div class="ftr"></div>
+</div>
+<!--/产品分类-->
+<div class="line20"></div>
+<!--免费喷印样品-->
+<div class="frame3"><div class="cont1"><%=get_article_content("frame3cont1")%></div><div class="cont2"><%=get_article_content("frame3cont2")%></div></div>
+<!--/免费喷印样品-->
+</div>
+<div class="right766">
+<!--热销产品-->
+    <div class="igoods_box">
+<dl class="hdr">
+<dd class="left"></dd>
+<dd><h3></h3></dd>
+<dd class="right"></dd>      
+</dl>
+<div class="lst">
+<a class="prev"></a>
+ <div id="winframe">
+<div id="winframe_list">
+          <%set DataTable dt4=get_article_list("goods", 0, 6, "status=0 and is_red=1")%>
+          <%foreach(DataRow dr in dt4.Rows)%>
+<dl>
+          <dt>
+            <a class="pic" href="<%linkurl("goods_show",{dr[id]})%>"><img src="{dr[imgrx]}" alt="{dr[title]}" width="187" height="216" /></a></dt>
+            <dd>
+              <a class="name" href="<%linkurl("goods_show",{dr[id]})%>">{dr[title]}</a>
+            </dd>
+          </dl>
+          <%/foreach%>
+</div></div>      
+<a class="next"></a>
+</div>
+<dl class="spr">
+<dd class="left"></dd><dd></dd><dd class="right"></dd>      
+</dl>
+<div class="clear"></div>
+<div class="cont"><%=get_article_content("keywords")%></div>
+<dl class="ftr">
+<dd class="left"></dd><dd></dd><dd class="right"></dd>      
+</dl>
+    </div>
+<!--/热销产品-->
+<div class="line20"></div> 
+<!--服务流程-->
+    <div class="main_box">
+<dl class="hdr">
+<dd class="left"></dd><dd class="w766"><h3 class="ttl"></h3></dd><dd class="right"></dd> 
+</dl>
+<div class="lst766 h123"><%=get_article_content("fwlct")%></div>
+<dl class="ftr">
+<dd class="left"></dd><dd class="w766"></dd><dd class="right"></dd>      
+</dl>
+    </div>
+<!--/服务流程-->
+</div>
+<!--/产品分类、热销产品、免费喷印样品、服务流程-->
+
+<div class="line20"></div> 
+<!--地区案例-->
+<div class="inews_list">
+    <div class="left"></div>
+    <div class="list">
+      <div class="head">
+        <a href="<%linkurl("news_list",43)%>" title="更多地区案例"><img src="<%templateskin%>/images/more.png" width="60" height="24" alt="更多地区案例"></a>
+      </div>
+      <ul>
+        <%set DataTable dt2=get_category_child_list("news", 43,4,"")%>
+        <%loop cdr2 dt2%>
+        <li><a title="{cdr2[title]}" href="<%linkurl("news_list",{cdr2[id]})%>"><img src="{cdr2[img_url]}" alt="{cdr2[title]}" />
+         <span>{cdr2[title]}</span><p><%cutstring({cdr2[content]},50)%></p></a>
+        </li>
+        <%/loop%>
+      </ul>
+</div>
+<div class="right"></div>
+</div>
+<!--/地区案例-->
+<div class="line20"></div>
+<!--合作案例、样品展示-->
+<div class="frame4">
+<div class="coll"></div>
+<div class="col1">
+<div class="head1"><a href="<%linkurl("news_list",56)%>" title="更多合作案例"><img src="<%templateskin%>/images/more.png" width="60" height="24" alt="更多合作案例"></a> 
+
+</div>
+<%set DataTable dt5=get_article_list("news", 0, 6, "status=0 and is_hot=1", "sort_id ,id")%>
+<%set int dr5cnt=1%>
+<%loop dr5 dt5%>
+<%if(dr5__loop__id<3)%>
+<div class="cell11"><a title="{dr5[title]}" href="<%linkurl("news_show",{dr5[id]})%>"><img src="{dr5[img_url]}" /><div><h1><%cutstring({dr5[title]},34)%></h1><p><%cutstring({dr5[zhaiyao]},80)%></p></div></a></div>
+<%else if(dr5__loop__id==3)%>
+<div class="cell13">
+<%set dr5cnt=1%>
+<ol><li><span><%datetostr({dr5[add_time]},MM-dd)%></span><i class="num">1</i><a title="{dr5[title]}" href="<%linkurl("news_show",{dr5[id]})%>"><%cutstring({dr5[title]},40)%></a></li>
+<%else%>
+<%set dr5cnt=dr5cnt+1%>
+<li><span><%datetostr({dr5[add_time]},MM-dd)%></span><i class="num"><%write dr5cnt%></i><a title="{dr5[title]}" href="<%linkurl("news_show",{dr5[id]})%>"><%cutstring({dr5[title]},40)%></a></li>
+<%/if%>
+          <%/loop%>
+<%if(dr5__loop__id>2)%>
+</ol></div>
+<%else if(dr5__loop__id==2)%>
+<div class="cell13"></div>
+<%else%>
+<div class="cell11"></div>
+<div class="cell13"></div>
+<%/if%>
+</div>
+<div class="col2"></div>
+<div class="col3">
+<div class="head2"><a href="<%linkurl("news_list",45)%>" title="更多样品展示"><img src="<%templateskin%>/images/more.png" width="60" height="24" alt="更多样品展示"></a></div>
+<div class="cell21">
+ <ul class="list1">
+        <%set DataTable dt6=get_article_list("news", 45,6,"status=0")%>
+         <%foreach(DataRow dr in dt6.Rows)%>
+        <li><a title="{dr[title]}" href="<%linkurl("news_show",{dr[id]})%>"><img src="{dr[img_url]}" width="155" height="135" alt="{dr[title]}" /><h1>{dr[title]}
+
+</h1></a>
+        </li>
+        <%/foreach%>
+      </ul>
+</div>
+</div>
+<div class="colr"></div>
+</div>
+<!--/合作案例、样品展示-->
+<div class="line20"></div>
+<!--合作伙伴-->
+<div class="links1">
+<ul>
+<%set DataTable Links=get_article_list("content", 59, 6, "status=0", "sort_id ,id")%>
+<%loop linksdr Links%>
+<li><img src="{linksdr[img_url]}" alt="{linksdr[title]}" width="135" height="107" /></li>
+<%/loop%>
+</ul>
+</div>
+<!--/合作伙伴-->
+<div class="line20"></div>
+<!--技术支持、关于联创-->
+<div class="frame4">
+<div class="coll"></div>
+<div class="col1">
+<div class="head3"><a href="<%linkurl("news_list",63)%>" title="更多技术支持"><img src="<%templateskin%>/images/more.png" width="60" height="24" alt="更多技术支持"></a> 
+
+</div>
+<%set DataTable dt7=get_article_list("news", 63, 6, "status=0 and is_red=1", "sort_id ,id")%>
+<%set int newsdr2cnt=1%>
+<%loop newsdr2 dt7%>
+<%if(newsdr2__loop__id<3)%>
+<div class="cell11"><a title="{newsdr2[title]}" href="<%linkurl("news_show",{newsdr2[id]})%>"><img src="{newsdr2[img_url]}" /><div><h1><%cutstring({newsdr2[title]},34)%></h1><p><%cutstring({newsdr2[zhaiyao]},80)%></p></div></a></div>
+<%else if(newsdr2__loop__id==3)%>
+<div class="cell13">
+<%set newsdr2cnt=1%>
+<ol><li><span><%datetostr({newsdr2[add_time]},MM-dd)%></span><i class="num">1</i><a title="{newsdr2[title]}" href="<%linkurl("news_show",{newsdr2[id]})%>"><%cutstring({newsdr2[title]},40)%></a></li>
+<%else%>
+<%set newsdr2cnt=newsdr2cnt+1%>
+<li><span><%datetostr({newsdr2[add_time]},MM-dd)%></span><i class="num"><%write newsdr2cnt%></i><a title="{newsdr2[title]}" href="<%linkurl("news_show",{newsdr2[id]})%>"><%cutstring({newsdr2[title]},40)%></a></li>
+<%/if%>
+          <%/loop%>
+<%if(newsdr2__loop__id>2)%>
+</ol></div>
+<%else if(newsdr2__loop__id==2)%>
+<div class="cell13"></div>
+<%else%>
+<div class="cell11"></div>
+<div class="cell13"></div>
+<%/if%>
+</div>
+<div class="col2"></div>
+<div class="col3">
+<div class="head4"><a href="<%linkurl("content","about")%>" title="关于联创"><img src="<%templateskin%>/images/more.png" width="60" height="24" alt="关于联创"></a></div>
+<div class="cell21"><%=get_article_content("home_about")%></div>
+</div>
+<div class="colr"></div>
+</div>
+<!--/技术支持、关于联创-->
+<div class="line20"></div>
+<!--友情链接-->
+<div class="links">
+<dl class="hdr">
+<dd class="left"></dd>
+<dd></dd>
+<dd class="right"></dd>
+</dl>
+<div class="clear"></div>
+<div class="lst">
+<h3>友情链接</h3>
+<ul>
+<%set DataTable Links2=get_article_list("content", 60, 36, "status=0", "sort_id ,id")%>
+<%loop linksdr2 Links2%>
+<li><a target="_blank" title="{linksdr2[title]}" href="{linksdr2[link_url]}">{linksdr2[title]}</a></li>
+<%/loop%>
+</ul>
+</div>
+<dl class="ftr">
+<dd class="left"></dd>
+<dd></dd>
+<dd class="right"></dd>
+</dl>
+</div>
+<!--/友情链接-->
+</div>
+<div class="clear"></div>
+<!--Footer-->
+<%template src="_footer.html"%>
+<!--/Footer-->
+</body>
+</html>
