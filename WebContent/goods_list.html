@@ -1,0 +1,164 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<%set RSTcms.Model.article_category cmodel=get_category_model(category_id)%>
+<%set string category_title=cmodel.title%>
+<title>{category_title} - {config.webname}</title>
+<meta content="{cmodel.seo_keywords}" name="keywords" />
+<meta content="{cmodel.seo_description}" name="description" />
+<link rel="stylesheet" href="{config.webpath}css/pagination.css" />
+<link media="screen" type="text/css" href="<%templateskin%>/css/style.css" rel="stylesheet">
+<script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/base.js"></script>
+{config.webcountcode}
+</head>
+
+<body>
+<!--Header-->
+<%template src="_header.html"%>
+<!--/Header-->
+<%if({cmodel.temp_id}==1)%>
+<div class="bannerwrap"><%=get_article_content("banner_products")%></div>
+<div class="line20"></div>
+<%/if%>
+
+<div class="wrap">
+<div class="breadcrumb">
+<%set string category_nav=get_category_menu("goods_list", category_id)%>
+<span><a href="<%linkurl("index")%>">首页</a>{category_nav}</span>
+</div>
+<div class="line15"></div>
+  <div class="left202">
+    <!--Sidebar-->
+    <!--产品分类-->
+    <div class="frame2">
+      <div class="hdr"><h3></h3></div>
+     <div  class="lst2"><ul>
+        <%set DataTable category_list3=get_category_child_list("goods", 0)%>
+        <%loop cdr3 category_list3%>
+        <li>
+            <%if({strtoint({cdr3[id]})}=={category_id})%>
+          <a class="font18 current" href="<%linkurl("goods_list",{cdr3[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{cdr3[title]}</a>
+            <%else%>
+          <a class="font18" href="<%linkurl("goods_list",{cdr3[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{cdr3[title]}</a>
+            <%/if%>
+<div class="sublst">
+            <%set DataTable category_list31=get_category_child_list("goods", {strtoint({cdr3[id]})})%>
+            <%loop cdr31 category_list31%>
+            <%if({strtoint({cdr31[id]})}=={category_id})%>
+            <a href="<%linkurl("goods_list",{cdr31[id]})%>" class="current"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{cdr31[title]}</a>
+            <%else%>
+            <a href="<%linkurl("goods_list",{cdr31[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{cdr31[title]}</a>
+            <%/if%>
+            <%/loop%>
+          </div>
+        </li>
+        <%/loop%>
+      </ul></div>
+      <div class="ftr"></div>
+</div>
+<!--/产品分类-->
+<div class="line20"></div>
+<div class="frame3"><div class="cont1"><%=get_article_content("frame3cont1")%></div><div class="cont2"><%=get_article_content("frame3cont2")%></div></div>
+    <!--/Sidebar-->
+  </div>
+
+<div class="right766">
+   <!--Content-->
+    <div class="main_box">
+<%if({cmodel.temp_id}==1)%>
+      <dl class="hdr45">
+        <dd class="left"><h1>{category_title}</h1></dd>
+        <dd class="w766"></dd>
+        <dd class="right"></dd>
+      </dl>
+       <div class="clear"></div>
+     <div class="lst766">
+        <div class="pro_list1"><div class="line5"></div><ul>
+          <%set DataTable goods_list1=get_article_list("goods", category_id, page, "status=0", out totalcount, out pagelist, "goods_list", category_id, "__id__")%><!--取得一个分页DataTable-->
+          <%loop dr1 goods_list1%>
+          <li>
+            <a class="pic{dr1__loop__id%2}" href="<%linkurl("goods_show",{dr1[id]})%>" title="{dr1[title]}"><img src="{dr1[img_url]}" alt="{dr1[title]}" /></a>
+            <div class="info{dr1__loop__id%2}">
+              <div  class="name"><a href="<%linkurl("goods_show",{dr1[id]})%>" title="{dr1[title]}">{dr1[title]}</a></div>
+            <div class="desc">{dr1[pro_desc]}</div> 
+ <a class="detail" href="<%linkurl("goods_show",{dr1[id]})%>" title="{dr1[title]}"><img src="<%templateskin%>/images/detail.png" alt="{dr1[title]}" /></a>
+            </div>
+          </li>
+          <%/loop%>
+        </ul></div>
+      <div class="line20"></div>
+      <div class="flickr">{pagelist}</div> <!--放置页码列表-->
+      <div class="line15"></div>
+      </div>
+      <dl class="ftr">
+        <dd class="left"></dd>
+        <dd class="w766"></dd>
+        <dd class="right"></dd>
+      </dl>
+<%else if({cmodel.temp_id}==2)%>
+            <%set DataTable category_list2=get_category_child_list("goods", {category_id})%>
+            <%loop cdr2 category_list2%>
+      <dl class="hdr">
+        <dd class="left"></dd>
+        <dd class="w766"><h1>{cdr2[title]}</h1><a href="<%linkurl("goods_list",{cdr2[id]})%>" title="更多{cdr2[title]}"><img src="<%templateskin%>/images/more.png" width="60" height="24" alt="更多{cdr2[title]}"></a></dd>
+        <dd class="right"></dd>
+      </dl>
+      <div class="clear"></div>
+      <div class="lst766">
+ <ul class="pro_list2">
+ <%set DataTable goods_list2=get_article_list("goods", {strtoint({cdr2[id]})}, 3, "status=0")%>
+<%foreach(DataRow dr in goods_list2.Rows)%>
+           <li><a class="pic" href="<%linkurl("goods_show",{dr[id]})%>" title="{dr[title]}"><img src="{dr[img_url]}" alt="{dr[title]}" /><div  class="name">{dr[title]}</div></a>            
+          </li>
+<%/foreach%>
+</ul>
+      <div class="line10"></div>
+      </div>
+      <dl class="ftr">
+        <dd class="left"></dd>
+        <dd class="w766"></dd>
+        <dd class="right"></dd>
+      </dl>
+<div class="line20"></div>
+            <%/loop%>
+<%else if({cmodel.temp_id}==3)%>
+      <dl class="hdr">
+        <dd class="left"></dd>
+        <dd class="w766"><h1>{category_title}</h1></dd>
+        <dd class="right"></dd>
+      </dl>
+      <div class="clear"></div>
+      <div class="lst766">
+        <div class="pro_list2"><div class="line5"></div><ul>
+          <%set DataTable goods_list3=get_article_list("goods", category_id, page, "status=0", out totalcount, out pagelist, "goods_list", category_id, "__id__")%><!--取得一个分页DataTable-->
+          <%loop dr3 goods_list3%>
+          <li>
+            <a class="pic" href="<%linkurl("goods_show",{dr3[id]})%>" title="{dr3[title]}"><img src="{dr3[img_url]}" alt="{dr3[title]}" /><div  class="name">{dr3[title]}</div></a>
+          </li>
+          <%/loop%>
+        </ul></div>
+      <div class="line20"></div>
+      <div class="flickr">{pagelist}</div> <!--放置页码列表-->
+      <div class="line15"></div>
+      </div>
+      <dl class="ftr">
+        <dd class="left"></dd>
+        <dd class="w766"></dd>
+        <dd class="right"></dd>
+      </dl>
+<%/if%>
+    </div>
+    <!--/Content-->
+  </div>
+<div class="line20"></div>
+<dl class="links2"><dd class="collw"></dd><dd class="colw w700"><%=get_article_content("links11")%></dd><dd class="colg w264"><%=get_article_content("links12")%></dd><dd class="colrg"></dd></dl>  
+</div>
+
+<div class="clear"></div>
+
+<!--Footer-->
+<%template src="_footer.html"%>
+<!--/Footer-->
+</body>
+</html>
