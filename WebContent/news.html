@@ -1,0 +1,112 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>技术支持- {config.webname}</title>
+<link media="screen" type="text/css" href="<%templateskin%>/css/style.css" rel="stylesheet">
+<script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="{config.webpath}scripts/jquery/jquery.KinSlideshow-1.2.1.min.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/base.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#focusNews").KinSlideshow();
+    })
+</script>
+{config.webcountcode}
+</head>
+
+<body>
+<!--Header-->
+<%template src="_header.html"%>
+<!--/Header-->
+
+<div class="wrap">
+<div class="breadcrumb">
+<span><a href="<%linkurl("index")%>">首页</a> &gt;&gt; <a href="<%linkurl("news")%>">技术支持</a></span>
+</div>
+<div class="line15"></div>
+<div class="frame4">
+<div class="col1">
+<div class="head5"><a href="<%linkurl("news_list",52)%>" title="更多维修保养资讯"><img src="<%templateskin%>/images/more.png" width="60" height="24" alt="更多维修保养资讯"></a> </div>
+<%set DataTable article_list2=get_article_list("news", 52, 6, "status=0")%>
+<%set int dr2cnt=1%>
+<%loop dr2 article_list2%>
+<%if(dr2__loop__id<3)%>
+<div class="cell11"><img src="{dr2[img_url]}" alt="{dr2[title]}" width="88" height="74" /><div><h1>{dr2[title]}</h1><p><%cutstring({dr2[zhaiyao]},68)%> 【<a title="{dr2[title]}" href="<%linkurl("news_show",{dr2[id]})%>">详细</a>】</p></div></div>
+<%else if(dr2__loop__id==3)%>
+<div class="cell13">
+<%set dr2cnt=1%>
+<ol><li><span><%datetostr({dr2[add_time]},MM-dd)%></span><i class="num">1</i><a title="{dr2[title]}" href="<%linkurl("news_show",{dr2[id]})%>"><%cutstring({dr2[title]},20)%></a></li>
+<%else%>
+<%set dr2cnt=dr2cnt+1%>
+<li><span><%datetostr({dr2[add_time]},MM-dd)%></span><i class="num"><%write dr2cnt%></i><a title="{dr2[title]}" href="<%linkurl("news_show",{dr2[id]})%>"><%cutstring({dr2[title]},20)%></a></li>
+<%/if%>
+          <%/loop%>
+<%if(dr2__loop__id>2)%>
+</ol></div>
+<%else if(dr2__loop__id==2)%>
+<div class="cell13"></div>
+<%else%>
+<div class="cell11"></div>
+<div class="cell13"></div>
+<%/if%>
+</div>
+<div class="col2"></div>
+<div class="col3">
+<div class="head6"></div>
+<div class="cell21">
+ <ul class="list2">
+        <%set DataTable article_list1=get_article_list("content",55,6,"")%>
+        <%loop dr1 article_list1%>
+        <li><img src="{dr1[img_url]}" width="155" height="145" alt="{dr1[title]}" /></li>
+        <%/loop%>
+      </ul>
+</div>
+</div>
+</div>
+</div>
+<div class="clear"></div>
+<%=get_article_content("banner4")%>
+<div class="wrap">
+<div class="frame4">
+<div class="col1">
+<div class="head7"><a href="<%linkurl("news_list",54)%>" title="更多喷码机资讯"><img src="<%templateskin%>/images/more.png" width="60" height="24" alt="更多喷码机资讯"></a> </div>
+<%set DataTable article_list3=get_article_list("news", 54, 6, "status=0")%>
+<%set int dr3cnt=1%>
+<%loop dr3 article_list3%>
+<%if(dr3__loop__id<3)%>
+<div class="cell11"><img src="{dr3[img_url]}" alt="{dr3[title]}" width="88" height="74" /><div><h1>{dr3[title]}</h1><p><%cutstring({dr3[zhaiyao]},68)%> 【<a title="{dr3[title]}" href="<%linkurl("news_show",{dr3[id]})%>">详细</a>】</p></div></div>
+<%else if(dr3__loop__id==3)%>
+<div class="cell13">
+<%set dr3cnt=1%>
+<ol><li><span><%datetostr({dr3[add_time]},MM-dd)%></span><i class="num">1</i><a title="{dr3[title]}" href="<%linkurl("news_show",{dr3[id]})%>"><%cutstring({dr3[title]},20)%></a></li>
+<%else%>
+<%set dr3cnt=dr3cnt+1%>
+<li><span><%datetostr({dr3[add_time]},MM-dd)%></span><i class="num"><%write dr3cnt%></i><a title="{dr3[title]}" href="<%linkurl("news_show",{dr3[id]})%>"><%cutstring({dr3[title]},20)%></a></li>
+<%/if%>
+          <%/loop%>
+<%if(dr3__loop__id>2)%>
+</ol></div>
+<%else if(dr3__loop__id==2)%>
+<div class="cell13"></div>
+<%else%>
+<div class="cell11"></div>
+<div class="cell13"></div>
+<%/if%>
+</div>
+<div class="col2"></div>
+<div class="col3">
+<div class="head8"></div>
+<div class="cell21">
+
+
+</div>
+</div>
+</div>
+</div>
+<div class="clear"></div>
+
+<!--Footer-->
+<%template src="_footer.html"%>
+<!--/Footer-->
+</body>
+</html>
