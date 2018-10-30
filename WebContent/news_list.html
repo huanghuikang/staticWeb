@@ -1,0 +1,533 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<%set RSTcms.Model.article_category cmodel=get_category_model(category_id)%>
+<%set string category_title=cmodel.title%>
+<title>{category_title} - {config.webname}</title>
+<meta content="{cmodel.seo_keywords}" name="keywords" />
+<meta content="{cmodel.seo_description}" name="description" />
+<link rel="stylesheet" href="{config.webpath}css/pagination.css" />
+<link media="screen" type="text/css" href="<%templateskin%>/css/style.css" rel="stylesheet">
+<script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/base.js"></script>
+<link href="{config.webpath}scripts/video/video-js.css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="{config.webpath}scripts/html5/html5media.min.js"></script>
+<![endif]-->
+<script src="{config.webpath}scripts/video/video.js"></script>
+{config.webcountcode}
+<script>
+  videojs.options.flash.swf = "{config.webpath}scripts/video/video-js.swf"
+</script>
+</head>
+
+<body>
+<!--Header-->
+<%template src="_header.html"%>
+<!--/Header-->
+<%if({cmodel.temp_id}==5)%>
+<div class="bannerwrap"><%=get_article_content("banner_alzx_news")%></div>
+<div class="line20"></div>
+<%/if%>
+<%if({cmodel.temp_id}==4)%>
+<div class="bannerwrap"><%=get_article_content("banner_jszc_news")%></div>
+<div class="line20"></div>
+<%/if%>
+<div class="wrap">
+<div class="breadcrumb">
+<%set string category_nav=get_category_menu("news_list", category_id)%>
+<span><a href="<%linkurl("index")%>">首页</a>{category_nav}</span>
+</div>
+<div class="line15"></div>
+<%if({cmodel.temp_id}==1)%>
+<!--技术支持-->
+<div class="frame4">
+  <div class="coll"></div>
+  <div class="col1">
+    <div class="head5"><a href="<%linkurl("news_list",52)%>" title="更多维修保养资讯"><img src="<%templateskin%>/images/more.png" width="60" height="24" alt="更多维修保养资讯"></a></div>
+    <%set DataTable dt1=get_article_list("news", 52, 6, "status=0")%>
+    <%set int dr1cnt=1%>
+    <%loop dr1 dt1%>
+      <%if(dr1__loop__id<3)%>
+        <div class="cell11"><a title="{dr1[title]}" href="<%linkurl("news_show",{dr1[id]})%>"><img src="{dr1[img_url]}" /><div><h1><%cutstring({dr1[title]},34)%></h1><p><%cutstring({dr1[zhaiyao]},80)%></p></div></a></div>
+      <%else if(dr1__loop__id==3)%>
+        <div class="cell13">
+        <%set dr1cnt=1%>
+        <ol><li><span><%datetostr({dr1[add_time]},MM-dd)%></span><i class="num">1</i><a title="{dr1[title]}" href="<%linkurl("news_show",{dr1[id]})%>"><%cutstring({dr1[title]},40)%></a></li>
+      <%else%>
+        <%set dr1cnt=dr1cnt+1%>
+        <li><span><%datetostr({dr1[add_time]},MM-dd)%></span><i class="num"><%write dr1cnt%></i><a title="{dr1[title]}" href="<%linkurl("news_show",{dr1[id]})%>"><%cutstring({dr1[title]},40)%></a></li>
+      <%/if%>
+    <%/loop%>
+    <%if(dr1__loop__id>2)%>
+      </ol></div>
+    <%else if(dr1__loop__id==2)%>
+      <div class="cell13"></div>
+    <%else%>
+      <div class="cell11"></div>
+      <div class="cell13"></div>
+    <%/if%>
+  </div>
+  <div class="col2"></div>
+  <div class="col3">
+    <div class="head6"></div>
+    <div class="cell21">
+    <ul class="list2">
+        <%set DataTable dt2=get_article_list("content",55,6,"")%>
+        <%loop dr2 dt2%>
+        <li><a href="{dr2[link_url]}"><img src="{dr2[img_url]}" width="155" height="145" alt="{dr2[title]}" /><a></li>
+        <%/loop%>
+    </ul>
+    </div>
+  </div>
+  <div class="colr"></div>
+</div>
+<div class="bannerwrap"><%=get_article_content("ban_news_1")%></div>
+<div class="line20"></div>
+<div class="frame4">
+<div class="coll"></div>
+<div class="col1">
+<div class="head7"><a href="<%linkurl("news_list",54)%>" title="更多喷码机资讯"><img src="<%templateskin%>/images/more.png" width="60" height="24" alt="更多喷码机资讯"></a> </div>
+<%set DataTable dt3=get_article_list("news", 54, 6, "status=0")%>
+<%set int dr3cnt=1%>
+<%loop dr3 dt3%>
+<%if(dr3__loop__id<3)%>
+<div class="cell11"><a title="{dr3[title]}" href="<%linkurl("news_show",{dr3[id]})%>"><img src="{dr3[img_url]}" /><div><h1><%cutstring({dr3[title]},34)%></h1><p><%cutstring({dr3[zhaiyao]},80)%></p></div></a></div>
+<%else if(dr3__loop__id==3)%>
+<div class="cell13">
+<%set dr3cnt=1%>
+<ol><li><span><%datetostr({dr3[add_time]},MM-dd)%></span><i class="num">1</i><a title="{dr3[title]}" href="<%linkurl("news_show",{dr3[id]})%>"><%cutstring({dr3[title]},40)%></a></li>
+<%else%>
+<%set dr3cnt=dr3cnt+1%>
+<li><span><%datetostr({dr3[add_time]},MM-dd)%></span><i class="num"><%write dr3cnt%></i><a title="{dr3[title]}" href="<%linkurl("news_show",{dr3[id]})%>"><%cutstring({dr3[title]},40)%></a></li>
+<%/if%>
+          <%/loop%>
+<%if(dr3__loop__id>2)%>
+</ol></div>
+<%else if(dr3__loop__id==2)%>
+<div class="cell13"></div>
+<%else%>
+<div class="cell11"></div>
+<div class="cell13"></div>
+<%/if%>
+</div>
+<div class="col2"></div>
+<div class="col3">
+<div class="head8"></div>
+<div class="cell21">
+<!--资料下载-->
+      <ol class="list4">
+        <%set DataTable down_list = get_article_list("down", 31, page, "status=0", out totalcount, out pagelist, "down_list", category_id, "__id__")%>
+        <%foreach(DataRow dr in down_list.Rows)%>
+        <li><a href="{dr[img_url]}" title="{{dr[title]}}" target="_blank"><span>{dr[title]}</span><img src="<%templateskin%>/images/down.png" width="75" height="29" alt="下载"></a></li>
+        <%/foreach%>
+      </ol>
+    <div class="line20"></div>
+    <div class="flickr">{pagelist}</div>
+<!--/资料下载-->
+</div>
+</div>
+<div class="colr"></div>
+</div>
+<div class="line20"></div>
+<dl class="links2"><dd class="collg"></dd><dd class="colg w264"><%=get_article_content("links21")%></dd><dd class="colw w700"><%=get_article_content("links22")%></dd><dd class="colrw"></dd></dl>  
+<!--/技术支持-->
+<%else if({cmodel.temp_id}==2)%>
+<!--案例中心-->
+<div class="frame4">
+  <div class="coll"></div>
+  <div class="col1">
+    <div class="head9"></div>
+    <%set DataTable dt21=get_article_list("news", 56, 6, "status=0 and is_hot=1")%>
+    <%set int dr21cnt=1%>
+    <%loop dr21 dt21%>
+      <%if(dr21__loop__id<3)%>
+        <div class="cell11"><a title="{dr21[title]}" href="<%linkurl("news_show",{dr21[id]})%>"><img src="{dr21[img_url]}" /><div><h1><%cutstring({dr21[title]},34)%></h1><p><%cutstring({dr21[zhaiyao]},80)%></p></div></a></div>
+      <%else if(dr21__loop__id==3)%>
+        <div class="cell13">
+        <%set dr21cnt=1%>
+        <ol><li><span><%datetostr({dr21[add_time]},MM-dd)%></span><i class="num">1</i><a title="{dr21[title]}" href="<%linkurl("news_show",{dr21[id]})%>"><%cutstring({dr21[title]},40)%></a></li>
+      <%else%>
+        <%set dr21cnt=dr21cnt+1%>
+        <li><span><%datetostr({dr21[add_time]},MM-dd)%></span><i class="num"><%write dr21cnt%></i><a title="{dr21[title]}" href="<%linkurl("news_show",{dr21[id]})%>"><%cutstring({dr21[title]},40)%></a></li>
+      <%/if%>
+    <%/loop%>
+    <%if(dr21__loop__id>2)%>
+      </ol></div>
+    <%else if(dr21__loop__id==2)%>
+      <div class="cell13"></div>
+    <%else%>
+      <div class="cell11"></div>
+      <div class="cell13"></div>
+    <%/if%>
+  </div>
+  <div class="col2"></div>
+  <div class="col3">
+    <div class="head10"><a href="<%linkurl("news_list",65)%>" title="更多视频展示"><img src="<%templateskin%>/images/more.png" width="60" height="24" alt="更多视频展示"></a></div>
+    <div class="cell21">
+    <ul class="list3">
+        <%set DataTable dt22=get_article_list("news",65,5,"")%>
+        <%loop dr22 dt22%>
+<%if(dr22__loop__id==1)%>
+<li class="current"><video controls preload="auto" width="400" height="224" src="{dr22[video]}">
+<source src="{dr22[video]}" type='video/mp4' />
+</video>
+</li>
+<%else%>        
+<li><a href="<%linkurl("news_show",{dr22[id]})%>" title="{dr22[title]}"><img src="{dr22[img_url]}" width="112" height="70" alt="{dr22[title]}" /></a></li>
+<%/if%>
+        <%/loop%>
+    </ul>
+    </div>
+  </div>
+  <div class="colr"></div>
+</div>
+<div class="bannerwrap"><%=get_article_content("ban_news_2")%></div>
+<div class="line20"></div>
+  <!--地区案例-->
+  <div class="inews_list">
+    <div class="left"></div>
+    <div class="list">
+      <div class="head">
+        <a href="<%linkurl("news_list",43)%>" title="更多地区案例"><img src="<%templateskin%>/images/more.png" width="60" height="24" alt="更多地区案例"></a>
+      </div>
+      <ul>
+        <%set DataTable dt23=get_category_child_list("news", 43,4,"")%>
+        <%loop dr23 dt23%>
+        <li><a title="{dr23[title]}" href="<%linkurl("news_list",{dr23[id]})%>"><img src="{dr23[img_url]}" alt="{dr23[title]}" />
+         <span>{dr23[title]}</span><p><%cutstring({dr23[content]},50)%></p></a>
+        </li>
+        <%/loop%>
+      </ul>
+</div>
+<div class="right"></div>
+</div>
+  <!--/地区案例-->
+  <div class="line20"></div> 
+  <!--行业案例-->
+  <div class="inews_list">
+    <div class="left"></div>
+    <div class="list">
+      <div class="hdr2">
+        <a href="<%linkurl("news_list",44)%>" title="更多行业案例"><img src="<%templateskin%>/images/more.png" width="60" height="24" alt="更多行业案例"></a>
+      </div>
+      <ul>
+        <%set DataTable dt24=get_category_child_list("news", 44,4,"")%>
+        <%loop dr24 dt24%>
+        <li><a title="{dr24[title]}" href="<%linkurl("news_list",{dr24[id]})%>"><img src="{dr24[img_url]}" alt="{dr24[title]}" />
+         <span>{dr24[title]}</span><p><%cutstring({dr24[content]},50)%></p></a>
+        </li>
+        <%/loop%>
+      </ul>
+</div>
+<div class="right"></div>
+</div>
+  <!--/行业案例-->
+<div class="line20"></div>
+<dl class="links2"><dd class="collg"></dd><dd class="colg w264"><%=get_article_content("links21")%></dd><dd class="colw w700"><%=get_article_content("links22")%></dd><dd class="colrw"></dd></dl>  
+<!--/案例中心-->
+<%else if({cmodel.temp_id}==3)%>
+<!--样品展示-->
+  <div class="left766">
+<ul class="pro_list3">
+        <%set DataTable dt31 = get_article_list("news", category_id, page, "status=0", out totalcount, out pagelist, "news_list", category_id, "__id__")%><!--取得一个分页DataTable-->
+        <%foreach(DataRow dr in dt31.Rows)%>
+ <li>
+            <a class="pic" href="<%linkurl("news_show",{dr[id]})%>" title="{dr[title]}"><img src="{dr[img_url]}" alt="{dr[title]}" /><div  class="name">{dr[title]}</div></a>
+          </li>        
+        <%/loop%>
+      </ul>
+      <div class="line20"></div>
+      <div class="flickr">{pagelist}</div><!--放置页码列表-->
+</div>
+  <div class="right202">
+    <!--产品分类-->
+    <div class="frame2">
+      <div class="hdr"><h3></h3></div>
+     <div  class="lst2"><ul>
+        <%set DataTable dt32=get_category_child_list("goods", 0)%>
+        <%foreach(DataRow dr in dt32.Rows)%>
+        <li>
+            <%if({strtoint({dr[id]})}=={category_id})%>
+          <a class="font18 current" href="<%linkurl("goods_list",{dr[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{dr[title]}</a>
+            <%else%>
+          <a class="font18" href="<%linkurl("goods_list",{dr[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{dr[title]}</a>
+            <%/if%>
+<div class="sublst">
+            <%set DataTable dt32s=get_category_child_list("goods", {strtoint({dr[id]})})%>
+        <%foreach(DataRow drs in dt32s.Rows)%>
+            <%if({strtoint({drs[id]})}=={category_id})%>
+            <a href="<%linkurl("goods_list",{drs[id]})%>" class="current"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{drs[title]}</a>
+            <%else%>
+            <a href="<%linkurl("goods_list",{drs[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{drs[title]}</a>
+            <%/if%>
+            <%/foreach%>
+          </div>
+        </li>
+        <%/foreach%>
+      </ul></div>
+      <div class="ftr"></div>
+</div>
+<!--/产品分类-->
+<div class="line20"></div>
+<div class="frame3"><div class="cont1"><%=get_article_content("frame3cont1")%></div><div class="cont2"><%=get_article_content("frame3cont2")%></div></div>
+</div>
+<!--/样品展示-->
+<%else if({cmodel.temp_id}==4)%>
+<!--技术支持子项列表-->
+  <div class="left766">
+   <!--Content-->
+    <div class="main_box">
+      <dl class="hdr">
+        <dd class="left"></dd>
+        <dd class="w766"><h1>{category_title}</h1></dd>
+<dd class="right"></dd>
+      </dl>
+      <div class="clear"></div>
+<div class="lst766">
+      <div class="line5"></div><ul class="news_list4">
+        <%set DataTable dt41= get_article_list("news", category_id, page, "status=0", out totalcount, out pagelist, "news_list", category_id, "__id__")%><!--取得一个分页DataTable-->
+        <%foreach(DataRow dr in dt41.Rows)%>
+        <li>
+<div class="img">
+          <a href="<%linkurl("news_show",{dr[id]})%>" title="{dr[title]}"><img src="{dr[img_url]}" alt="{dr[title]}" width="101" height="98" /></a>
+</div>
+          <div class="info">
+<h2><a href="<%linkurl("news_show",{dr[id]})%>" title="{dr[title]}">{dr[title]}</a></h2>
+            <span class="time right"><%datetostr({dr[add_time]},yyyy年MM月dd日)%></span>
+           </div>
+          <div class="note"><a href="<%linkurl("news_show",{dr[id]})%>" title="{dr[zhaiyao]}"><%cutstring({dr[zhaiyao]},150)%></a></div>
+        </li>
+        <%/loop%>
+      </ul>
+      <div class="line20"></div>
+      <div class="flickr">{pagelist}</div><!--放置页码列表-->
+</div>
+<dl class="ftr">
+        <dd class="left"></dd>
+        <dd class="w766"></dd>
+<dd class="right"></dd>
+      </dl>
+    </div>
+    <!--/Content-->
+  </div>
+  <div class="right202">
+    <!--产品分类-->
+    <div class="frame2">
+      <div class="hdr"><h3></h3></div>
+     <div  class="lst2"><ul>
+        <%set DataTable dt42=get_category_child_list("goods", 0)%>
+        <%foreach(DataRow dr in dt42.Rows)%>
+        <li>
+            <%if({strtoint({dr[id]})}=={category_id})%>
+          <a class="font18 current" href="<%linkurl("goods_list",{dr[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{dr[title]}</a>
+            <%else%>
+          <a class="font18" href="<%linkurl("goods_list",{dr[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{dr[title]}</a>
+            <%/if%>
+<div class="sublst">
+            <%set DataTable dt42s=get_category_child_list("goods", {strtoint({dr[id]})})%>
+        <%foreach(DataRow drs in dt42s.Rows)%>
+            <%if({strtoint({drs[id]})}=={category_id})%>
+            <a href="<%linkurl("goods_list",{drs[id]})%>" class="current"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{drs[title]}</a>
+            <%else%>
+            <a href="<%linkurl("goods_list",{drs[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{drs[title]}</a>
+            <%/if%>
+            <%/foreach%>
+          </div>
+        </li>
+        <%/foreach%>
+      </ul></div>
+      <div class="ftr"></div>
+</div>
+<!--/产品分类-->
+<div class="line20"></div>
+<div class="frame3"><div class="cont1"><%=get_article_content("frame3cont1")%></div><div class="cont2"><%=get_article_content("frame3cont2")%></div></div>
+</div>
+<div class="line20"></div>
+<dl class="links2"><dd class="collw"></dd><dd class="colw w700"><%=get_article_content("links11")%></dd><dd class="colg w264"><%=get_article_content("links12")%></dd><dd class="colrg"></dd></dl>  
+<!--/技术支持子项列表-->
+<%else if({cmodel.temp_id}==5)%>
+<!--案例中心子项-->
+<div class="left766">
+   <!--Content-->
+      <div class="main_box">
+      <dl class="hdr"><dd class="left"></dd><dd class="w766"><h1>{category_title}</h1></dd><dd class="right"></dd></dl>
+      <div class="clear"></div>
+      <div class="lst766">
+<div class="pad20">{cmodel.content}</div>
+ <ul class="pro_list4">
+      <%set DataTable dt51=get_category_child_list("news", {category_id})%>
+<%foreach(DataRow dr in dt51.Rows)%>
+           <li><a class="pic" href="<%linkurl("news_list",{dr[id]})%>" title="{dr[title]}"><img src="{dr[img_url]}" alt="{dr[title]}" /><div  class="name">{dr[title]}</div></a>
+          </li>
+<%/foreach%>
+</ul>
+      <div class="line10"></div>
+      </div>
+      <dl class="ftr"><dd class="left"></dd><dd class="w766"></dd><dd class="right"></dd></dl>
+<div class="line20"></div>
+</div>
+   <!--/Content-->
+</div>
+  <div class="right202">
+    <!--产品分类-->
+    <div class="frame2">
+      <div class="hdr"><h3></h3></div>
+     <div  class="lst2"><ul>
+        <%set DataTable dt52=get_category_child_list("goods", 0)%>
+        <%foreach(DataRow dr in dt52.Rows)%>
+        <li>
+            <%if({strtoint({dr[id]})}=={category_id})%>
+          <a class="font18 current" href="<%linkurl("goods_list",{dr[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{dr[title]}</a>
+            <%else%>
+          <a class="font18" href="<%linkurl("goods_list",{dr[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{dr[title]}</a>
+            <%/if%>
+<div class="sublst">
+            <%set DataTable dt52s=get_category_child_list("goods", {strtoint({dr[id]})})%>
+        <%foreach(DataRow drs in dt52s.Rows)%>
+            <%if({strtoint({drs[id]})}=={category_id})%>
+            <a href="<%linkurl("goods_list",{drs[id]})%>" class="current"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{drs[title]}</a>
+            <%else%>
+            <a href="<%linkurl("goods_list",{drs[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{drs[title]}</a>
+            <%/if%>
+            <%/foreach%>
+          </div>
+        </li>
+        <%/foreach%>
+      </ul></div>
+      <div class="ftr"></div>
+</div>
+<!--/产品分类-->
+<div class="line20"></div>
+<div class="frame3"><div class="cont1"><%=get_article_content("frame3cont1")%></div><div class="cont2"><%=get_article_content("frame3cont2")%></div></div>
+</div><div class="line20"></div>
+<dl class="links2"><dd class="collw"></dd><dd class="colw w700"><%=get_article_content("links11")%></dd><dd class="colg w264"><%=get_article_content("links12")%></dd><dd class="colrg"></dd></dl>  
+</div>
+<!--/案例中心子项-->
+<%else if({cmodel.temp_id}==6)%>
+<!--视频展示-->
+  <div class="left766">
+<ul class="pro_list5">
+        <%set DataTable dt61 = get_article_list("news", category_id, page, "status=0", out totalcount, out pagelist, "news_list", category_id, "__id__")%><!--取得一个分页DataTable-->
+        <%foreach(DataRow dr in dt61.Rows)%>
+ <li>
+            <a href="<%linkurl("news_show",{dr[id]})%>" title="{dr[title]}"><img src="{dr[img_url]}" alt="{dr[title]}" /><div  class="name">{dr[title]}</div></a>
+          </li>        
+        <%/loop%>
+      </ul>
+      <div class="line20"></div>
+      <div class="flickr">{pagelist}</div><!--放置页码列表-->
+</div>
+  <div class="right202">
+    <!--产品分类-->
+    <div class="frame2">
+      <div class="hdr"><h3></h3></div>
+     <div  class="lst2"><ul>
+        <%set DataTable dt62=get_category_child_list("goods", 0)%>
+        <%foreach(DataRow dr in dt62.Rows)%>
+        <li>
+            <%if({strtoint({dr[id]})}=={category_id})%>
+          <a class="font18 current" href="<%linkurl("goods_list",{dr[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{dr[title]}</a>
+            <%else%>
+          <a class="font18" href="<%linkurl("goods_list",{dr[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{dr[title]}</a>
+            <%/if%>
+<div class="sublst">
+            <%set DataTable dt62s=get_category_child_list("goods", {strtoint({dr[id]})})%>
+        <%foreach(DataRow drs in dt62s.Rows)%>
+            <%if({strtoint({drs[id]})}=={category_id})%>
+            <a href="<%linkurl("goods_list",{drs[id]})%>" class="current"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{drs[title]}</a>
+            <%else%>
+            <a href="<%linkurl("goods_list",{drs[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{drs[title]}</a>
+            <%/if%>
+            <%/foreach%>
+          </div>
+        </li>
+        <%/foreach%>
+      </ul></div>
+      <div class="ftr"></div>
+</div>
+<!--/产品分类-->
+<div class="line20"></div>
+<div class="frame3"><div class="cont1"><%=get_article_content("frame3cont1")%></div><div class="cont2"><%=get_article_content("frame3cont2")%></div></div>
+</div>
+<!--/视频展示-->
+<%else if({cmodel.temp_id}==7)%>
+<!--案例中心子项列表-->
+  <div class="left766">
+   <!--Content-->
+    <div class="main_box">
+      <dl class="hdr">
+        <dd class="left"></dd>
+        <dd class="w766"><h1>{category_title}</h1></dd>
+<dd class="right"></dd>
+      </dl>
+      <div class="clear"></div>
+<div class="lst766">
+<div class="pad20">{cmodel.content}</div>
+      <ul class="news_list">
+        <%set DataTable dt51 = get_article_list("news", category_id, page, "status=0", out totalcount, out pagelist, "news_list", category_id, "__id__")%><!--取得一个分页DataTable-->
+        <%foreach(DataRow dr in dt51.Rows)%>
+        <li>
+<div class="img">
+          <a href="<%linkurl("news_show",{dr[id]})%>" title="{dr[title]}"><img src="{dr[img_url]}" alt="{dr[title]}" width="150" height="98" /></a>
+</div>
+          <div class="info">
+<h2><a href="<%linkurl("news_show",{dr[id]})%>" title="{dr[title]}">{dr[title]}</a></h2>
+            <span class="time right"><%datetostr({dr[add_time]},yyyy年MM月dd日)%></span>
+           </div>
+          <div class="note"><a href="<%linkurl("news_show",{dr[id]})%>" title="{dr[zhaiyao]}"><%cutstring({dr[zhaiyao]},150)%></a></div>
+        </li>
+        <%/loop%>
+      </ul>
+      <div class="line20"></div>
+      <div class="flickr">{pagelist}</div><!--放置页码列表-->
+</div>
+<dl class="ftr">
+        <dd class="left"></dd>
+        <dd class="w766"></dd>
+<dd class="right"></dd>
+      </dl>
+    </div>
+    <!--/Content-->
+  </div>
+  <div class="right202">
+    <!--产品分类-->
+    <div class="frame2">
+      <div class="hdr"><h3></h3></div>
+     <div  class="lst2"><ul>
+        <%set DataTable dt72=get_category_child_list("goods", 0)%>
+        <%foreach(DataRow dr in dt72.Rows)%>
+        <li>
+            <%if({strtoint({dr[id]})}=={category_id})%>
+          <a class="font18 current" href="<%linkurl("goods_list",{dr[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{dr[title]}</a>
+            <%else%>
+          <a class="font18" href="<%linkurl("goods_list",{dr[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{dr[title]}</a>
+            <%/if%>
+<div class="sublst">
+            <%set DataTable dt72s=get_category_child_list("goods", {strtoint({dr[id]})})%>
+        <%foreach(DataRow drs in dt72s.Rows)%>
+            <%if({strtoint({drs[id]})}=={category_id})%>
+            <a href="<%linkurl("goods_list",{drs[id]})%>" class="current"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{drs[title]}</a>
+            <%else%>
+            <a href="<%linkurl("goods_list",{drs[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{drs[title]}</a>
+            <%/if%>
+            <%/foreach%>
+          </div>
+        </li>
+        <%/foreach%>
+      </ul></div>
+      <div class="ftr"></div>
+</div>
+<!--/产品分类-->
+<div class="line20"></div>
+<div class="frame3"><div class="cont1"><%=get_article_content("frame3cont1")%></div><div class="cont2"><%=get_article_content("frame3cont2")%></div></div>
+</div>
+<!--/案例中心子项列表-->
+<%/if%>
+</div>
+<div class="clear"></div>
+<!--Footer-->
+<%template src="_footer.html"%>
+<!--/Footer-->
+</body>
+</html>
