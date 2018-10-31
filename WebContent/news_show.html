@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<%set RSTcms.Model.article_category cmodel=get_category_model(model.category_id)%>
+<%set string category_title=cmodel.title%>
+<title>{model.title} - {category_title} - {config.webname}</title>
+<meta content="{model.seo_keywords}" name="keywords" />
+<meta content="{model.seo_description}" name="description" />
+<link media="screen" type="text/css" href="<%templateskin%>/css/style.css" rel="stylesheet">
+<script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/base.js"></script>
+<link href="{config.webpath}scripts/video/video-js.css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="{config.webpath}scripts/html5/html5media.min.js"></script>
+<![endif]-->
+<script src="{config.webpath}scripts/video/video.js"></script>
+{config.webcountcode}
+<script>
+videojs.options.flash.swf = "{config.webpath}scripts/video/video-js.swf"
+</script>
+</head>
+
+<body>
+<!--Header-->
+<%template src="_header.html"%>
+<!--/Header-->
+<div class="wrap">
+<div class="breadcrumb">
+<%set string category_nav=get_category_menu("news_list", model.category_id)%>
+<span><a href="<%linkurl("index")%>">首页</a>{category_nav} &gt;&gt; {model.title}</span>
+</div>
+<div class="line15"></div>
+  <div class="left766">
+   <!--Content-->
+    <div class="main_box">
+<dl class="hdr8">
+<dd class="left"></dd>      
+<dd class="w766"></dd>      
+<dd class="right"></dd>      
+</dl>
+<div class="lst766 p20">
+<div class="meta">
+        <h1 class="meta-tit">{model.title}</h1>
+        <div class="share"></div>
+        <p class="meta-info">
+            <span class="time"><%datetostr({model.add_time},yyyy年MM月dd日)%></span>
+            <span class="view"><script type="text/javascript" src="{config.webpath}tools/submit_ajax.ashx?action=view_article_click&id={model.id}&click=1"></script>次浏览</span>
+        </p>
+      </div>
+      <div class="entry">
+<%if({cmodel.temp_id}==6)%>
+<div style="text-align:center;width:700px;"><video controls preload="auto" width="400" height="360" style="margin:0 auto;" src="{model.fields[video]}">
+<source src="{model.fields[video]}" type='video/mp4' />
+</video></div>
+<%/if%>
+        {model.content}
+      </div>
+<div class="line20"></div>
+<div class="pagingnav">
+<p>上一篇：<%=get_prevandnext_article("news_show", -1, "没有资料！", 0)%></p>
+<p>下一篇：<%=get_prevandnext_article("news_show", 1, "没有资料！", 0)%></p>
+</div>
+</div>
+<dl class="ftr">
+<dd class="left"></dd>      
+<dd class="w766"></dd>      
+<dd class="right"></dd>      
+</dl>
+    </div>
+    <!--/Content-->
+  </div>
+  <div class="right202">
+    <!--产品分类-->
+    <div class="frame2">
+      <div class="hdr"><h3></h3></div>
+     <div  class="lst2"><ul>
+        <%set DataTable dt1=get_category_child_list("goods", 0)%>
+        <%foreach(DataRow dr in dt1.Rows)%>
+        <li>
+          <a class="font18" href="<%linkurl("goods_list",{dr[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{dr[title]}</a>
+<div class="sublst">
+            <%set DataTable dt1s=get_category_child_list("goods", {strtoint({dr[id]})})%>
+        <%foreach(DataRow drs in dt1s.Rows)%>
+            <a href="<%linkurl("goods_list",{drs[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{drs[title]}</a>
+            <%/foreach%>
+          </div>
+        </li>
+        <%/foreach%>
+      </ul></div>
+      <div class="ftr"></div>
+</div>
+<!--/产品分类-->
+<div class="line20"></div>
+<div class="frame3"><div class="cont1"><%=get_article_content("frame3cont1")%></div><div class="cont2"><%=get_article_content("frame3cont2")%></div></div>
+</div>
+<div class="line20"></div>
+<dl class="links2"><dd class="collw"></dd><dd class="colw w700"><%=get_article_content("links11")%></dd><dd class="colg w264"><%=get_article_content("links12")%></dd><dd class="colrg"></dd></dl>  
+</div>
+
+<div class="clear"></div>
+
+<!--Footer-->
+<%template src="_footer.html"%>
+<!--/Footer-->
+</body>
+</html>
