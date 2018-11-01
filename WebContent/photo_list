@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<%set RSTcms.Model.article_category cmodel=get_category_model(category_id)%>
+<%set string category_title=cmodel.title%>
+<title>{category_title} - {config.webname}</title>
+<link rel="stylesheet" href="{config.webpath}css/pagination.css" />
+<link media="screen" type="text/css" href="<%templateskin%>/css/style.css" rel="stylesheet">
+<script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/base.js"></script>
+{config.webcountcode}
+</head>
+
+<body>
+<!--Header-->
+<%template src="_header.html"%>
+<!--/Header-->
+<div class="wrap">
+<div class="breadcrumb">
+      <%set string category_nav=get_category_menu("photo_list", category_id)%>
+<span><a href="<%linkurl("index")%>">首页</a>{category_nav}</span>
+</div>
+<div class="line15"></div>
+  <div class="left766">
+   <!--Content-->
+    <div class="main_box">
+<dl class="hdr">
+        <dd class="left"></dd>
+        <dd class="w766"><h1>{category_title}</h1></dd>
+        <dd class="right"></dd>
+      </dl>
+      <div class="clear"></div>
+<%if({cmodel.temp_id}==1)%>
+      <div class="photo_list">
+        <ul>
+          <%set DataTable photo_list=get_article_list("photo", category_id, page, "status=0", out totalcount, out pagelist, "photo_list", category_id, "__id__")%><!--取得一个分页DataTable-->
+          <%foreach(DataRow dr in photo_list.Rows)%>
+          <li>
+            <a class="img" href="<%linkurl("photo_show",{dr[id]})%>" title="{dr[title]}">
+              <img src="{dr[img_url]}" alt="{dr[title]}" />
+              <div class="info">
+                <h4>{dr[title]}</h4>
+                <p>{dr[zhaiyao]}</p>
+              </div>
+            </a>
+          </li>
+          <%/foreach%>
+        </ul>
+      </div>
+<%/if%>
+      <div class="line20"></div>
+      <div class="flickr">{pagelist}</div> <!--放置页码列表-->
+    </div>
+    <!--/Content-->
+  </div>
+  
+  <div class="left202">
+    <!--Sidebar-->
+    <!--/Sidebar-->
+  </div>
+</div>
+
+<div class="clear"></div>
+
+<!--Footer-->
+<%template src="_footer.html"%>
+<!--/Footer-->
+</body>
+</html>
