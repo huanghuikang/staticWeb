@@ -1,0 +1,90 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<%set string category_title=get_category_title(model.category_id,"图片分享")%>
+<title>{model.title} - {category_title} - {config.webname}</title>
+<meta content="{model.seo_keywords}" name="keywords" />
+<meta content="{model.seo_description}" name="description" />
+<link media="screen" type="text/css" href="<%templateskin%>/css/style.css" rel="stylesheet">
+<script type="text/javascript" src="{config.webpath}scripts/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/base.js"></script>
+<script type="text/javascript" src="<%templateskin%>/js/slide.js"></script>
+{config.webcountcode}
+</head>
+
+<body>
+<!--Header-->
+<%template src="_header.html"%>
+<!--/Header-->
+<div class="wrap">
+<div class="breadcrumb">
+<%set string category_nav=get_category_menu("photo_list", model.category_id)%>
+<span><a href="<%linkurl("index")%>">首页</a>{category_nav} &gt;&gt; {model.title}</span>
+</div>
+<div class="line15"></div>
+  <div class="left766">
+   <!--Content-->
+    <div class="main_box">
+<dl class="hdr8">
+<dd class="left"></dd>      
+<dd class="w766"></dd>      
+<dd class="right"></dd>      
+</dl>
+<div class="lst766 p20">
+<div class="meta">
+        <h1 class="meta-tit">{model.title}</h1>
+        <div class="share"></div>
+        <p class="meta-info">
+            <span class="time"><%datetostr({model.add_time},yyyy年MM月dd日)%></span>
+            <span class="view"><script type="text/javascript" src="{config.webpath}tools/submit_ajax.ashx?action=view_article_click&id={model.id}&click=1"></script>次浏览</span>
+        </p>
+      </div>
+      <div class="entry">
+        {model.content}
+      </div>
+<div class="line20"></div>
+<div class="pagingnav">
+<p>上一篇：<%=get_prevandnext_article("photo_show", -1, "没有资料！", 0)%></p>
+<p>下一篇：<%=get_prevandnext_article("photo_show", 1, "没有资料！", 0)%></p>
+</div>
+</div>
+<dl class="ftr">
+<dd class="left"></dd>      
+<dd class="w766"></dd>      
+<dd class="right"></dd>      
+</dl>
+    </div>
+    <!--/Content-->
+  </div>
+  
+  <div class="right202">
+    <!--Sidebar-->
+    <!--产品分类-->
+    <div class="frame2">
+      <div class="hdr"><h3></h3></div>
+     <div  class="lst1"><ul>
+        <%set DataTable category_list3=get_category_list("goods", 0,6,"call_index like 'home_%'")%>
+        <%loop cdr3 category_list3%>
+        <li>
+          <a class="font18" href="<%linkurl("goods_list",{cdr3[id]})%>"><img src="<%templateskin%>/images/point1.png" width="6" height="8"  />{cdr3[title]}</a>
+        </li>
+        <%/loop%>
+      </ul></div>
+      <div class="ftr"></div>
+</div>
+<!--/产品分类-->
+<div class="line20"></div>
+<div class="frame3"><div class="cont1"><%=get_article_content("frame3cont1")%></div><div class="cont2"><%=get_article_content("frame3cont2")%></div></div>
+    <!--/Sidebar-->
+  </div>
+<div class="line20"></div>
+<dl class="links2"><dd class="collw"></dd><dd class="colw w700"></dd><dd class="colg w264"></dd><dd class="colrg"></dd></dl>
+</div>
+
+<div class="clear"></div>
+
+<!--Footer-->
+<%template src="_footer.html"%>
+<!--/Footer-->
+</body>
+</html>
