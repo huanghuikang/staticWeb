@@ -14,8 +14,6 @@ ALTER PROCEDURE [dbo].[gerenxiaoshounew]
 AS
 BEGIN
 	SET NOCOUNT ON;
-	
-	
 	create table #yg_pay_sum
 		(
 		fd_id varchar(200),
@@ -67,9 +65,6 @@ BEGIN
 		set @sqlname=REPLACE(@sqlname,'（','')
 		set @sqlname=REPLACE(@sqlname,'）','')
 		set @sqlname=REPLACE(@sqlname,'、','')
-
-
-
 		--select @sqlname
 
 		set @sql='select cast(0 as decimal(18,2)) as sumjine,* into yg_pay_sumth from #yg_pay_sum as P pivot(sum(jine) for p.text1 in ('+@sqlname+')) as T'
@@ -81,12 +76,8 @@ BEGIN
 		(select fd_id,sum(jine) as jine from #yg_pay_sum group by fd_id) b on b.fd_id=a.fd_id
 
 		declare @sqlstr varchar(8000)
-
-
 		set @sqlstr='select RANK() OVER(ORDER BY b.fd_name) AS 序号,b.fd_name as 姓名,a.sumjine as 总计,'+@sqlname+' from yg_pay_sumth a inner join sys_org_element b on a.fd_id=b.fd_id '
 		exec(@sqlstr)
-
-
 		drop table yg_pay_sumth
 		drop table #yg_pay_sum
 
