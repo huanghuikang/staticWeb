@@ -13,7 +13,6 @@ ALTER PROCEDURE [dbo].[gerenxiaoshounew]
 )
 AS
 BEGIN
-	
 	SET NOCOUNT ON;
 	
 	
