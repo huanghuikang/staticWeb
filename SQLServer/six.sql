@@ -72,3 +72,4 @@ BEGIN
 		--order by fd_node_allnum
 		) t6 on t6.fd_handler_id=t4.fd_handler_id
 		where t2.fd_fact_node_name not like '起草'
+END
