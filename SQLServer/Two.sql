@@ -42,13 +42,11 @@ BEGIN
     END
 	AND 1 = CASE WHEN ISNULL(@fd_endTime, '') = '' THEN 1
 	ELSE CASE WHEN t2.fd_baoXiaoRiQi<=@fd_endTime
-			THEN 1
-			ELSE 0
-		END
+		THEN 1
+		ELSE 0
+	END
     END
 	group by t1.fd_365662c47e4e56_text,t2.fd_type1
-
-
 	insert #bumenchaxunjiane
 	select 1,fd_type1,'合计',sum(isnull(cast(fd_jinE as decimal(18,2)),0)) as '金额' from #bumenchaxunjiane group by fd_type1
 
