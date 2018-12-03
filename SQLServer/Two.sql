@@ -36,9 +36,9 @@ BEGIN
     END
 	AND 1 = CASE WHEN ISNULL(@fd_beginTime, '') = '' THEN 1
 		ELSE CASE WHEN t2.fd_baoXiaoRiQi>=@fd_beginTime
-				THEN 1
-				ELSE 0
-			END
+			THEN 1
+			ELSE 0
+	END
     END
 	AND 1 = CASE WHEN ISNULL(@fd_endTime, '') = '' THEN 1
 	ELSE CASE WHEN t2.fd_baoXiaoRiQi<=@fd_endTime
